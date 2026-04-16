@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin-top: 30px;
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+
+        input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #ffcc00;
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .result {
+            margin-top: 30px;
+        }
+
+        .recipe-box {
+            background: white;
+            color: black;
+            width: 320px;
+            margin: 15px auto;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        }
+
+        .recipe-box h3 {
+            color: #764ba2;
+        }
+
+        .ingredients {
+            background-color: #f2f2f2;
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 8px;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>🍽 Smart Recipe & Ingredients Tracker</h1>
+
+<div class="container">
+    <p>Enter ingredients (comma separated):</p>
+    <input type="text" id="ingredients" placeholder="e.g. rice, tomato, onion">
+    <button onclick="findRecipe()">Find Recipe</button>
+
+    <div class="result" id="output"></div>
+</div>
+
+<script>
+function findRecipe() {
+
+    let input = document.getElementById("ingredients").value.toLowerCase();
+    let output = document.getElementById("output");
+
+    output.innerHTML = "";
+
+    let recipes = [
+        {name:"Tomato Rice 🍅🍚", ingredients:"rice, tomato, onion, spices"},
+        {name:"Vegetable Fried Rice 🥕", ingredients:"rice, carrot, beans, cabbage"},
+        {name:"Grilled Chicken 🍗", ingredients:"chicken, pepper, salt"},
+        {name:"Paneer Butter Masala 🧀", ingredients:"paneer, butter, tomato, cream"},
+        {name:"French Toast 🍞🥚", ingredients:"bread, egg, milk"},
+        {name:"Chocolate Cake 🍰", ingredients:"flour, cocoa, sugar, egg"},
+        {name:"Egg Curry 🥚", ingredients:"egg, onion, tomato, spices"},
+        {name:"Veg Sandwich 🥪", ingredients:"bread, tomato, cucumber, butter"},
+        {name:"Chicken Biryani 🍛", ingredients:"rice, chicken, spices, onion"},
+        {name:"Pasta Alfredo 🍝", ingredients:"pasta, cream, butter, cheese"}
+    ];
+
+    let found = false;
+
+    for(let i=0; i<recipes.length; i++) {
+
+        if(recipes[i].ingredients.includes(input)) {
+
+            output.innerHTML += `
+                <div class="recipe-box">
+                    <h3>${recipes[i].name}</h3>
+                    <div class="ingredients">
+                        <b>Ingredients:</b> ${recipes[i].ingredients}
+                    </div>
+                </div>
+            `;
+            found = true;
+        }
+    }
+
+    if(!found){
+        output.innerHTML = "<p>No matching recipe found. Try different ingredients!</p>";
+    }
+}
+</script>
+
+</body>
+</html>
